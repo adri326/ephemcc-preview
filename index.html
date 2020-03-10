@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>IMCCE</title>
+    <script src="main.js" defer></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Hasklig Medium", monospace;
+        color: white;
+      }
+
+      #output {
+        width: 100vw;
+        height: 100vh;
+        background: #101010;
+      }
+
+      #info {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        max-width: 20vw;
+        width: 60em;
+      }
+
+      #controls {
+        position: absolute;
+        left: 1em;
+        top: 1em;
+      }
+
+      #controls > ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+
+      #controls > ul > li.needs-heliocentric {
+        color: #808080;
+      }
+
+      #controls > ul > li:not(.needs-heliocentric),
+      body.heliocentric > #controls > ul > li {
+        cursor: pointer;
+        color: #afafaf;
+      }
+
+      #controls > ul > li:hover:not(.needs-heliocentric),
+      body.heliocentric > #controls > ul > li:hover {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body class="heliocentric">
+    <canvas id="output"></canvas>
+    <div id="info"></div>
+    <nav id="controls">
+      <ul>
+        <li onclick="heliocentric = !heliocentric; draw();">Heliocentric ⇄ geocentric</li>
+        <li onclick="draw()">Clear</li>
+        <li onclick="if (heliocentric) find_center_circle(earth, 'earth');" class="needs-heliocentric">Orbit center: Earth, circular</li>
+        <li onclick="if (heliocentric) find_center_circle(mars, 'mars');" class="needs-heliocentric">Orbit center: Mars, circular</li>
+        <li onclick="if (heliocentric) find_center_ellipse(earth, 'earth');" class="needs-heliocentric">Orbit center: Earth, elliptic</li>
+        <li onclick="if (heliocentric) find_center_ellipse(mars, 'mars');" class="needs-heliocentric">Orbit center: Mars, elliptic</li>
+      </ul>
+    </nav>
+  </body>
+</html>
